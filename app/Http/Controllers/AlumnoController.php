@@ -1,7 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Alumno;
+use App\Http\Requests\StoreAlumnoRequest;
+use App\Http\Requests\UpdateAlumnoRequest;
+use App\Models\Seccion;
 use Illuminate\Http\Request;
 
 class AlumnoController extends Controller
@@ -11,7 +14,9 @@ class AlumnoController extends Controller
      */
     public function index()
     {
-        //
+        return view('alumnos.alumno-index', [
+            'alumnos' => Alumno::all(),
+        ]);
     }
 
     /**
@@ -25,7 +30,7 @@ class AlumnoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreAlumnoRequest $request)
     {
         //
     }
@@ -33,15 +38,16 @@ class AlumnoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Alumno $alumno)
     {
-        //
+        $secciones = Seccion::all();
+        return view('alumnos.alumno-show', compact('alumno', 'secciones'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Alumno $alumno)
     {
         //
     }
@@ -49,7 +55,7 @@ class AlumnoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateAlumnoRequest $request, Alumno $alumno)
     {
         //
     }
@@ -57,8 +63,20 @@ class AlumnoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Alumno $alumno)
     {
         //
     }
+
+    public function actualizarSeccionesAlumno(Request $request, Alumno $alumno)
+    {
+        $alumno->secciones()->sync($request->seccion_id);
+        return redirect()->route('alumno.show', $alumno);
+    }
+
+    // public function desinscribirAlumno(Request $request, Alumno $alumno)
+    // {
+    //     $alumno->secciones()->detach($request->seccion_id);
+    //     return redirect()->route('alumno.show', $alumno);
+    // }
 }
