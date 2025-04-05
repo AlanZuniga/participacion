@@ -24,7 +24,7 @@
                 <select name="seccion_id[]" id="seccion_id" multiple>
                     @foreach ($secciones as $seccion)
                         <option value="{{ $seccion->id }}" @selected(array_search($seccion->id, $alumno->secciones->pluck('id')->toArray()) !== false)>
-                            {{ $seccion->nombre }} - {{ $seccion->seccion }}
+                            {{ $seccion->nombre }} - {{ $seccion->seccion }} ({{ $seccion->docente->nombre }})
                         </option>
                     @endforeach
                 </select>
