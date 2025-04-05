@@ -21,11 +21,22 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-
-        Docente::factory(10)
+            // Crear docentes con 3 secciones cada uno
+        $docentes = Docente::factory(10)
             ->has(Seccion::factory()->count(3), 'secciones')
             ->create();
 
-        Alumno::factory(10)->create();
+        // Crear 10 alumnos
+        $alumnos = Alumno::factory(10)->create();
+
+        // Asignar cada alumno a una o más secciones aleatorias
+        foreach ($alumnos as $alumno) {
+            // Obtener secciones aleatorias (puedes ajustar el número)
+            $secciones = Seccion::inRandomOrder()->take(rand(1, 3))->get();
+
+            // Asignar las secciones al alumno
+            $alumno->secciones()->attach($secciones);
+
+        }
     }
 }

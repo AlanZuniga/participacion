@@ -15,7 +15,7 @@
                         <td>{{ $alumno->correo }}</td>
                         <td>
                             @foreach ($alumno->secciones as $seccion)
-                                {{ $seccion->nombre }} - {{ $seccion->seccion }}<br>
+                                {{ $seccion->nombre }} - {{ $seccion->seccion }} ({{ $seccion->docente->nombre }})<br>
                             @endforeach
                         </td>
                     </tr>
