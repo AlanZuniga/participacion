@@ -74,9 +74,9 @@ class AlumnoController extends Controller
         return redirect()->route('alumno.show', $alumno);
     }
 
-    public function desinscribirAlumno(Request $request, Alumno $alumno)
-    {
-        $alumno->secciones()->detach($request->seccion_id);
-        return redirect()->route('alumno.show', $alumno);
-    }
+    //public function desinscribirAlumno(Request $request, Alumno $alumno)
+    //{
+      //  $alumno->secciones()->detach($request->seccion_id);
+        //return redirect()->route('alumno.show', $alumno);
+    //}
 }
