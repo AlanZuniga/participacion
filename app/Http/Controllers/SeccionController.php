@@ -1,6 +1,8 @@
 <?php
-use App\Models\Alumno;
 namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use App\Models\Alumno;
+
 use App\Models\Seccion;
 use App\Http\Requests\StoreSeccionRequest;
 use App\Http\Requests\UpdateSeccionRequest;
