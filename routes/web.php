@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AlumnoController;
+use App\Http\Controllers\DocenteController;
+use App\Http\Controllers\SeccionController;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
@@ -11,6 +13,15 @@ Route::get('/', function () {
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
+
+
+Route::resource('docente', DocenteController::class);
+
+Route::post('seccion/{seccion}/actualizar', [SeccionController::class, 'actualizarAlumnosSeccion'])
+    ->name('seccion.actualizar-alumnos')
+    ->middleware(['auth']);
+    
+Route::resource('seccion', SeccionController::class)->middleware(['auth']);
 
 Route::post('alumno/{alumno}/actualizar-secciones', [AlumnoController::class, 'actualizarSeccionesAlumno'])
     ->name('alumno.actualizar-secciones')
